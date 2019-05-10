@@ -1,0 +1,85 @@
+---
+title: "Introduction to geysertimes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to geysertimes}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+```
+
+# Basic Use
+
+Load the package
+```{r library}
+library("geysertimes")
+```
+
+## Get the Data
+
+The `gt_get_data` function downloads the compressed eruptions data
+from `https://geysertimes.org/archive/`,
+reads the data compressed data into R
+and saves version of the R object
+in the location specified
+in the `dest_folder` argument to the function.
+The default location for `dest_folder` is
+`file.path(tempdir(), "GeyserTimes"))`.
+This default location is used to meet the CRAN requirement of
+not writing files by default to any location other than under `tempdir()`.
+
+```{r default_get}
+defpath <- gt_get_data()
+defpath
+```
+
+Users are encouraged to set `dest_folder` to the value given by
+`gt_path()` which is a permanent location appropriate for the
+user on the particular platform.
+
+```{r gt_path}
+gt_path()
+```
+
+If a permanent location is used, the user only needs to get the
+data once.
+Using the suggested value for `dest_folder`:
+```{r recommend_path}
+recpath <- gt_get_data(dest_folder=gt_path())
+recpath
+```
+
+## Load the Data
+
+The `gt_load_data` is used to load the saved R object.
+
+```{r load01}
+gtdata <- gt_load_data()
+```
+
+A quick look at the data:
+```{r look}
+dim(gtdata)
+names(gtdata)
+```
+
+### Data Version
+The data that is downloaded is versioned.
+The version id is the date when the data was downloaded.
+
+The `gt_version()` lists the latest version of the data that
+has been downloaded.
+Setting `all=TRUE` will list all versions of the data that have been
+downloaded.
+
+```{r version}
+gt_version()
+```
+
+```{r version_all}
+gt_version(all=TRUE)
+```
+
