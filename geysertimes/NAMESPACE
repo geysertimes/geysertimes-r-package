@@ -1,6 +1,0 @@
-export(
-  gt_get_data,
-  gt_load_data,
-  gt_path,
-  gt_version
-)
