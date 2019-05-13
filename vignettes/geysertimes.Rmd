@@ -10,11 +10,16 @@ vignette: >
 knitr::opts_chunk$set(collapse = T, comment = "#>")
 options(tibble.print_min = 4L, tibble.print_max = 4L)
 ```
+```{r, hidden_values, echo=FALSE}
+defpath <- "/tmp/RtmpvSGw5Y/GeyserTimes/2019-05-13/eruptions_data.rds"
+recpath <- "/home/spk/.local/share/GeyserTimes/2019-05-13/eruptions_data.rds"
+```
 
 # Basic Use
 
-Load the package
+Load the package other packages used in this vignette.
 ```{r library}
+suppressPackageStartupMessages(library("dplyr"))
 library("geysertimes")
 ```
 
@@ -31,8 +36,10 @@ The default location for `dest_folder` is
 This default location is used to meet the CRAN requirement of
 not writing files by default to any location other than under `tempdir()`.
 
-```{r default_get}
+```{r default_get, eval=FALSE}
 defpath <- gt_get_data()
+```
+```{r default_get_print}
 defpath
 ```
 
@@ -47,8 +54,10 @@ gt_path()
 If a permanent location is used, the user only needs to get the
 data once.
 Using the suggested value for `dest_folder`:
-```{r recommend_path}
+```{r recommend_path, eval=FALSE}
 recpath <- gt_get_data(dest_folder=gt_path())
+```
+```{r recommend_path_print}
 recpath
 ```
 
@@ -83,3 +92,10 @@ gt_version()
 gt_version(all=TRUE)
 ```
 
+## Simple Analysis
+
+Geysers with the most recorded eruptions:
+```{r eruptions_counts, tibble.print_max=20L}
+print(n=20,
+gtdata %>% group_by(geyser) %>% summarise(N=n()) %>% arrange(desc(N)))
+```

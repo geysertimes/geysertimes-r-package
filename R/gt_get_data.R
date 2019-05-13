@@ -2,7 +2,7 @@ gt_get_data <- function(dest_folder = file.path(tempdir(), "GeyserTimes"),
   overwrite=FALSE, quiet=FALSE, version=lubridate::today()) {
   if(dest_folder != gt_path()) {
     if(!quiet) {
-      message("Set dest_folder to GeyserTimes::gt_path() so that data persists between R sessions.\n")
+      message("Set dest_folder to geysertimes::gt_path() so that data persists between R sessions.\n")
     }
   }
   outpath <- file.path(dest_folder, version, "eruptions_data.rds")
@@ -28,6 +28,9 @@ gt_get_data <- function(dest_folder = file.path(tempdir(), "GeyserTimes"),
   gt_tib[["eruption_time_epoch"]] <- lubridate::as_datetime(gt_tib[["eruption_time_epoch"]])
   gt_tib[["time_updated"]] <- lubridate::as_datetime(gt_tib[["time_updated"]])
   gt_tib[["time_entered"]] <- lubridate::as_datetime(gt_tib[["time_entered"]])
+  indx_name <- match(names(gt_tib), names(gt_new_names))
+  stopifnot(!any(is.na(indx_name)))
+  names(gt_tib) <- gt_new_names[indx_name]
   saveRDS(gt_tib, file=outpath)
   invisible(outpath)
 }
