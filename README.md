@@ -17,7 +17,6 @@ devtools::install_github("geysertimes/geysertimes-r-package")
 
 Here's a quick examle to get you going. We'll be plotting a very simple histogram of the last 500 eruptions of Old Faithful. First, we need to download and retrieve the archive data, which will be installed at the path given by `gt_path()`.
 ```r
-# install.packages("tidyverse"), is recommended
 library(geysertimes)
 gt_get_data(path = gt_path()) # Download the data
 eruptions <- gt_load_data() # Load the tibble
@@ -35,6 +34,6 @@ oldfaithful <- mutate(oldfaithful, interval = lag(time) - time) # Add interval c
 Finally, we'll take the last 500 intervals and plot this with R's built-in histogram functionality. Note that you can likely achieve better-looking charts, this is for demonstration only.
 ```r
 last500 <- slice(oldfaithful, 2:101)
-hist(as.numeric(lat500$interval), breaks = 250, main = "Old Faithful Intervals", xlab = "Interval [seconds]", xlim = c(3600, 7200))
+hist(as.numeric(last500$interval), breaks = 250, main = "Old Faithful Intervals", xlab = "Interval [seconds]", xlim = c(3600, 7200))
 ```
 ![Old Faithful Intervals](quickstart.jpeg)
