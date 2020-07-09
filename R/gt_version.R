@@ -6,7 +6,7 @@
     decreasing=TRUE)
   if(length(gt_files) < 1 || all(is.na(versions))) {
     if(!quiet) {
-      message("Cannot find any GeyserTimes data under", path)
+      message("Cannot find any geysertimes data under", path)
     }
     return(NULL)
   }

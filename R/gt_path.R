@@ -1,7 +1,7 @@
 "gt_path" <- function(temp=FALSE) {
   if(temp) {
-    file.path(tempdir(), "GeyserTimes")
+    file.path(tempdir(), "geysertimes")
   } else {
-    rappdirs::user_data_dir(appname = "GeyserTimes", appauthor = "GeyserTimes")
+    rappdirs::user_data_dir(appname = "geysertimes", appauthor = "geysertimes")
   }
 }

@@ -21,20 +21,12 @@ list all versions of the GeyserTimes data found,
 not just the newest.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
 \value{
 a character string listing the version(s) of GeyserTimes data
 stored under `path`.
 }
 \author{
 Stephen Kaluzny <spkaluzny@gmail.com>
-}
-\note{
-}
-\seealso{
-\code{gt_path}
 }
 \examples{
 gt_version()

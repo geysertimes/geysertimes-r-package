@@ -1,5 +1,6 @@
-\name{gt_load_data}
-\alias{gt_load_data}
+\name{gt_load_eruptions}
+\alias{gt_load_erutions}
+\alias{gt_load_geysers}
 \title{
 Load the Geyser Times Data
 }
@@ -8,7 +9,8 @@ Loads the Geyser Times data that was previously downloaded by a call
 to \code{gt_get_data}.
 }
 \usage{
-gt_load_data(path = gt_path(), quiet = FALSE, version = NULL)
+gt_load_eruptions(path = gt_path(), quiet = FALSE, version = NULL)
+gt_load_geysers(path = gt_path(), quiet = FALSE, version = NULL)
 }
 \arguments{
   \item{path}{
@@ -32,7 +34,7 @@ available under \code{path}.
 Typically, a user would download the data once, with a call to
 `gt_get_data(destdir=gt_path())`.
 Subsequent R sessions can the load this downloaded data with a
-call to `gt_load_data()`.
+call to `gt_loaderuptions()`.
 }
 \value{
 a tibble containing the Geyser Times data with names:
@@ -42,7 +44,7 @@ a tibble containing the Geyser Times data with names:
 Stephen Kaluzny <spkaluzny@gmail.com>
 }
 \seealso{
-\code{gt_get_data}.
+\code{gt_get_data}
 }
 \examples{
 }
