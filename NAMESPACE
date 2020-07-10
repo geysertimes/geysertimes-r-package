@@ -1,6 +1,7 @@
 export(
   gt_get_data,
-  gt_load_data,
+  gt_load_eruptions,
+  gt_load_geysers,
   gt_path,
   gt_version
 )

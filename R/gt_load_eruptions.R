@@ -1,13 +1,13 @@
-"gt_load_data" <- function(path=gt_path(), quiet=FALSE, version=NULL) {
+"gt_load_eruptions" <- function(path=gt_path(), quiet=FALSE, version=NULL) {
   if(is.null(version)) {
     version <- gt_version(path, quiet=TRUE)
   }
   if(is.null(version)) {
     if(!quiet) {
-      message("Cannot find any GeyserTimes data under ", path)
+      message("Cannot find any geysertimes data under ", path)
     }
     # Look in Rtmp
-    path <- file.path(tempdir(), "GeyserTimes")
+    path <- file.path(tempdir(), "geysertimes")
     version <- gt_version(path, quiet=TRUE)
     if(is.null(version)) {
       return(NULL)

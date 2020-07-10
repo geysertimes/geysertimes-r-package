@@ -11,8 +11,8 @@ knitr::opts_chunk$set(collapse = T, comment = "#>")
 options(tibble.print_min = 4L, tibble.print_max = 4L)
 ```
 ```{r, hidden_values, echo=FALSE}
-defpath <- "/tmp/RtmpvSGw5Y/GeyserTimes/2019-05-13/eruptions_data.rds"
-recpath <- "/home/spk/.local/share/GeyserTimes/2019-05-13/eruptions_data.rds"
+defpath <- "/tmp/RtmpvSGw5Y/geysertimes/2020-07-08"
+recpath <- "/home/spk/.local/share/GeyserTimes/2020-07-08"
 ```
 
 # Basic Use
@@ -32,7 +32,7 @@ and saves version of the R object
 in the location specified
 in the `dest_folder` argument to the function.
 The default location for `dest_folder` is
-`file.path(tempdir(), "GeyserTimes"))`.
+`file.path(tempdir(), "geysertimes"))`.
 This default location is used to meet the CRAN requirement of
 not writing files by default to any location other than under `tempdir()`.
 
@@ -63,16 +63,19 @@ recpath
 
 ## Load the Data
 
-The `gt_load_data` is used to load the saved R object.
+The `gt_load_eruptions` is used to load the eruptions data in the
+current session.
+The `gt_load_geysers` loads the geyser location data in the current session.
 
 ```{r load01}
-gtdata <- gt_load_data()
+eruptions <- gt_load_eruptions()
+geysers <- gt_load_geysers()
 ```
 
 A quick look at the data:
 ```{r look}
-dim(gtdata)
-names(gtdata)
+dim(eruptions)
+names(eruptions)
 ```
 
 ### Data Version
@@ -83,6 +86,7 @@ The `gt_version()` lists the latest version of the data that
 has been downloaded.
 Setting `all=TRUE` will list all versions of the data that have been
 downloaded.
+
 
 ```{r version}
 gt_version()
@@ -97,5 +101,5 @@ gt_version(all=TRUE)
 Geysers with the most recorded eruptions:
 ```{r eruptions_counts, tibble.print_max=20L}
 print(n=20,
-gtdata %>% group_by(geyser) %>% summarise(N=n()) %>% arrange(desc(N)))
+eruptions %>% group_by(geyser) %>% summarise(N=n()) %>% arrange(desc(N)))
 ```
