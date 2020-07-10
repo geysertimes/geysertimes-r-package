@@ -20,7 +20,7 @@ Here's a quick example to get you going. We'll be plotting a very simple histogr
 ```r
 library(geysertimes)
 gt_get_data(dest_folder = gt_path())  # Download the data
-eruptions <- gt_load_data()  # Load the tibble
+eruptions <- gt_load_eruptions()  # Load the tibble
 ```
 
 At this point, we have the full archive of eruptions. We first filter it to only contain Old Faithful eruptions that are primary. Then, we sort it descending by eruption time and add the interval column as the time difference between two subsequent rows.

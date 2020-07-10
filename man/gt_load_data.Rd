@@ -34,7 +34,7 @@ available under \code{path}.
 Typically, a user would download the data once, with a call to
 `gt_get_data(destdir=gt_path())`.
 Subsequent R sessions can the load this downloaded data with a
-call to `gt_loaderuptions()`.
+call to `gt_load_eruptions()`.
 }
 \value{
 a tibble containing the Geyser Times data with names:
