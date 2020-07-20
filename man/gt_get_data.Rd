@@ -5,14 +5,14 @@ Download GeyserTimes Data
 }
 \description{
 Downloads the data from geysertimes.org.
-Reads the data and creates a tibble object in `dest_dir`.
+Reads the data and creates a tibble object in `dest_folder`.
 }
 \usage{
-gt_get_data(dest_dir = file.path(tempdir(), "geysertimes"),
+gt_get_data(dest_folder = file.path(tempdir(), "geysertimes"),
   overwrite = FALSE, quiet = FALSE, version = lubridate::today())
 }
 \arguments{
-  \item{dest_dir}{
+  \item{dest_folder}{
 the location where the binary tibble object should be written.
 The default is under the current R session's temp directory
 which will disappear when the session ends.
@@ -20,7 +20,7 @@ which will disappear when the session ends.
   \item{overwrite}{
 a logical value,
 if\code{FALSE}, the data will not be downloaded again if copy of the data,
-with \code{version}, already exists in \code{dest_dir}.
+with \code{version}, already exists in \code{dest_folder}.
 }
   \item{quiet}{
 a logical value, if \code{TRUE}, no messages are displayed.
@@ -37,7 +37,7 @@ The data is downloaded from the GeyserTimes archive web site
 The data is then read with \code{readr::read_tsv} wtih appropriate
 column types.
 The resulting \code{tibble} object is then saved as an binary (\code{.rds})
-in \code{dest_dir}.
+in \code{dest_folder}.
 }
 \value{
 a character string giving the full path to the directory where
@@ -47,14 +47,16 @@ the GeyserTimes data was stored.
 Stephen Kaluzny <spkaluzny@gmail.com>.
 }
 \note{
-Users are encouraged to set \code{dest_dir} to \code{gt_path()} to save
+Users are encouraged to set \code{dest_folder} to \code{gt_path()} to save
 a persistent copy of the data.
 }
 \seealso{
 gt_load_eruptions, gt_load_geysers.
 }
 \examples{
+\donttest{
 dpath0 <- gt_get_data()  # data saved under tempdir()
-dpath1 <- gt_get_data(dest_dir=gt_path())  # data saved under gt_path()
+dpath1 <- gt_get_data(dest=gt_path())  # data saved under gt_path()
+}
 }
 \keyword{geysertimes}

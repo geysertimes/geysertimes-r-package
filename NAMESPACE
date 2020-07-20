@@ -1,3 +1,5 @@
+importFrom("utils", "download.file")
+importFrom("jsonlite", "fromJSON")
 export(
   gt_get_data,
   gt_load_eruptions,

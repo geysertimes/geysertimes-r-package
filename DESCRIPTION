@@ -1,7 +1,8 @@
 Package: geysertimes
 Title: Geyser Data from GeyserTimes.org
-Version: 0.0.0.9005
-Imports: lubridate, rappdirs, readr 
+Version: 0.0.0.9009
+Imports: jsonlite, lubridate, rappdirs, readr, utils
+Suggests: curl, dplyr, knitr, rmarkdown
 Authors@R: 
     person(given = "Stephen",
            family = "Kaluzny",
@@ -10,7 +11,7 @@ Authors@R:
 Description: Gets geyser eruption and observation data from the GeyserTimes
   database and optionally stores it locally.
 License: MIT + file LICENSE
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: no
