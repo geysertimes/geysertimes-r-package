@@ -15,20 +15,14 @@ a logical value, if \code{TRUE}, the temporary path is returned.
 This location will disappear when the R session ends.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
 \value{
 a character string giving the full path where local GeyserTimes data is stored.
 }
 \author{
 Stephen Kaluzny <spkaluzny@gmail.com>
 }
-\note{
-%%  ~~further notes~~
-}
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{gt_get_data}}
 }
 \examples{
 # The default location for the GeyserTimes data:

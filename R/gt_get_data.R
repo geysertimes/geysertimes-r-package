@@ -41,6 +41,9 @@ get_eruptions <- function(version) {
   trydownload <- try(
     download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
       silent=TRUE)
+  if(trydownload != 0) {
+    stop("Cannot download", data_url)
+  }
   eruptions <- readr::read_tsv(gzfile(download_data_file_path),
     col_types=c("dcddddddddddddcccccccdddc"), quote="", progress=FALSE)
   # rename columns:
@@ -65,8 +68,11 @@ get_eruptions <- function(version) {
 }
 
 get_geysers <- function(version) {
-  geysers_df <- jsonlite::fromJSON(
-    "https://www.geysertimes.org/api/v5/geysers")$geysers
+  geysers_df <- try(jsonlite::fromJSON(
+    "https://www.geysertimes.org/api/v5/geysers")$geysers, silent=TRUE)
+  if(class(geysers_df) == "try-error") {
+    stop("Download of geysers data failed") 
+  }
   geysers_df[["longitude"]] <- as.numeric(geysers_df[["longitude"]])
   geysers_df[["latitude"]] <- as.numeric(geysers_df[["latitude"]])
   geysers_df[["longitude"]] <- replace(geysers_df[["longitude"]],

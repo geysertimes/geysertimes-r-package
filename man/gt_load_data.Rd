@@ -1,5 +1,5 @@
 \name{gt_load_eruptions}
-\alias{gt_load_erutions}
+\alias{gt_load_eruptions}
 \alias{gt_load_geysers}
 \title{
 Load the Geyser Times Data
@@ -47,5 +47,7 @@ Stephen Kaluzny <spkaluzny@gmail.com>
 \code{gt_get_data}
 }
 \examples{
+tmppath <- gt_get_data()
+erupt <- gt_load_eruptions()
 }
 \keyword{geysertimes}
