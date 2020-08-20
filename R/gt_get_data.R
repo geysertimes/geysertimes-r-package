@@ -64,6 +64,18 @@ get_eruptions <- function(version) {
     which(eruptions[["duration_modifier"]] == 0), NA)
   # convert duration_seconds from character to numeric:
   eruptions[["duration_seconds"]] <- as.numeric(eruptions[["duration_seconds"]])
+  # convert 0/1 to logical FALSE/TRUE
+  eruptions[["has_seconds"]] <- ifelse(eruptions[["has_seconds"]] == 1, TRUE, FALSE)
+  eruptions[["exact"]] <- ifelse(eruptions[["exact"]] == 1, TRUE, FALSE)
+  eruptions[["near_start"]] <- ifelse(eruptions[["near_start"]] == 1, TRUE, FALSE)
+  eruptions[["in_eruption"]] <- ifelse(eruptions[["in_eruption"]] == 1, TRUE, FALSE)
+  eruptions[["electronic"]] <- ifelse(eruptions[["electronic"]] == 1, TRUE, FALSE)
+  eruptions[["approximate"]] <- ifelse(eruptions[["approximate"]] == 1, TRUE, FALSE)
+  eruptions[["webcam"]] <- ifelse(eruptions[["webcam"]] == 1, TRUE, FALSE)
+  eruptions[["initial"]] <- ifelse(eruptions[["initial"]] == 1, TRUE, FALSE)
+  eruptions[["major"]] <- ifelse(eruptions[["major"]] == 1, TRUE, FALSE)
+  eruptions[["minor"]] <- ifelse(eruptions[["minor"]] == 1, TRUE, FALSE)
+  eruptions[["questionable"]] <- ifelse(eruptions[["questionable"]] == 1, TRUE, FALSE)
   eruptions
 }
 
