@@ -47,7 +47,9 @@ Stephen Kaluzny <spkaluzny@gmail.com>
 \code{gt_get_data}
 }
 \examples{
+\dontrun{
 tmppath <- gt_get_data()
 erupt <- gt_load_eruptions()
+}
 }
 \keyword{geysertimes}
