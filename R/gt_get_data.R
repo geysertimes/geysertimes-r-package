@@ -38,7 +38,16 @@ get_eruptions <- function(version) {
     download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
       silent=TRUE)
   if(trydownload != 0) {
-    stop("Cannot download", data_url)
+    version <- version - 1
+    raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
+    download_data_file_path <- file.path(tempdir(), raw_data_file)
+    data_url <- paste0(base_url, raw_data_file)
+    trydownload <- try(
+      download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
+        silent=TRUE)
+  }
+  if(trydownload != 0) {
+    stop("Cannot download ", data_url)
   }
   eruptions <- readr::read_tsv(gzfile(download_data_file_path),
     col_types=c("dcddddddddddddcccccccdddc"), quote="", progress=FALSE)
