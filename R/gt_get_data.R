@@ -12,10 +12,6 @@ gt_get_data <- function(dest_folder = file.path(tempdir(), "geysertimes"),
     warning("geysertimes eruptions data for this version already exists on the local machine. Use the 'overwrite' argument to re-download if neccessary.")
     return(invisible(outpathdir))
   }
-  if(file.exists(outpath_geysers) && !overwrite) {
-    warning("geysertimes geysers data for this version already exists on the local machine. Use the 'overwrite' argument to re-download if neccessary.")
-    return(invisible(outpathdir))
-  }
   if(!dir.exists(outpathdir)) {
     dir.create(outpathdir, recursive=TRUE)
   }
