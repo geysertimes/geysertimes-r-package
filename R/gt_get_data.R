@@ -5,19 +5,26 @@ gt_get_data <- function(dest_folder = file.path(tempdir(), "geysertimes"),
       message("Set dest_folder to geysertimes::gt_path() so that data persists between R sessions.\n")
     }
   }
-  outpathdir <- file.path(dest_folder, version)
-  outpath_eruptions <- file.path(dest_folder, version, "eruptions_data.rds")
-  outpath_geysers <- file.path(dest_folder, version, "geysers_data.rds")
-  if(file.exists(outpath_eruptions) && !overwrite) {
-    warning("geysertimes eruptions data for this version already exists on the local machine. Use the 'overwrite' argument to re-download if neccessary.")
+
+  # eruption data determine actual version (date):
+  downloaded_file <- eruptions_file(version)
+  actual_version <- tools::file_path_sans_ext(
+    basename(downloaded_file), compression=TRUE)
+  actual_version <- gsub("geysertimes_eruptions_complete_", "", actual_version)
+
+  # paths for saving the data:
+  outpathdir <- file.path(dest_folder, actual_version)
+  outpath_eruptions <- file.path(outpathdir, "eruptions_data.rds")
+  outpath_geysers <- file.path(outpathdir, "geysers_data.rds")
+  if(file.exists(outpathdir) && !overwrite) {
+    warning("geysertimes data for this version already exists on the local machine. Use the 'overwrite' argument to re-download if neccessary.")
     return(invisible(outpathdir))
   }
   if(!dir.exists(outpathdir)) {
     dir.create(outpathdir, recursive=TRUE)
   }
 
-  # eruption data:
-  eruptions <- get_eruptions(version)
+  eruptions <- read_eruptions_file(downloaded_file)
   saveRDS(eruptions, file=outpath_eruptions)
 
   # geysers data:
@@ -26,21 +33,34 @@ gt_get_data <- function(dest_folder = file.path(tempdir(), "geysertimes"),
   invisible(outpathdir)
 }
 
-get_eruptions <- function(version) {
+eruptions_file <- function(version) {
   # eruptions data:
   base_url <- "https://geysertimes.org/archive/complete/"
+  donwload_tmp <- tempdir()
+  # Try specified version:
   raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
-  download_data_file_path <- file.path(tempdir(), raw_data_file)
+  download_data_file_path <- file.path(donwload_tmp, raw_data_file)
   data_url <- paste0(base_url, raw_data_file)
   oldOpt <- options(warn=-1)
   on.exit(options(oldOpt))
   trydownload <- try(
     download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
       silent=TRUE)
+  # Try one day before specified version:
   if(trydownload != 0) {
     version <- version - 1
     raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
-    download_data_file_path <- file.path(tempdir(), raw_data_file)
+    download_data_file_path <- file.path(donwload_tmp, raw_data_file)
+    data_url <- paste0(base_url, raw_data_file)
+    trydownload <- try(
+      download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
+        silent=TRUE)
+  }
+  # Try one day after specified version:
+  if(trydownload != 0) {
+    version <- version + 1
+    raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
+    download_data_file_path <- file.path(donwload_tmp, raw_data_file)
     data_url <- paste0(base_url, raw_data_file)
     trydownload <- try(
       download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
@@ -49,7 +69,11 @@ get_eruptions <- function(version) {
   if(trydownload != 0) {
     stop("Cannot download ", data_url)
   }
-  eruptions <- readr::read_tsv(gzfile(download_data_file_path),
+  download_data_file_path
+}
+
+read_eruptions_file <- function(path) {
+  eruptions <- readr::read_tsv(gzfile(path),
     col_types=c("dcddddddddddddcccccccdddc"), quote="", progress=FALSE)
   # rename columns:
   indx_name <- match(names(eruptions), names(gt_new_names))

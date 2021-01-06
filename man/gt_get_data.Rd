@@ -34,7 +34,7 @@ Typically, only the version with today's date is available.
 \details{
 The data is downloaded from the GeyserTimes archive web site
 \url{https://geysertimes.org/archive/} to the \code{tempdir()} directory.
-The data is then read with \code{readr::read_tsv} wtih appropriate
+The data is then read with \code{readr::read_tsv} with appropriate
 column types.
 The resulting \code{tibble} object is then saved as an binary (\code{.rds})
 in \code{dest_folder}.
