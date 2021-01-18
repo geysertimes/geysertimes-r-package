@@ -7,7 +7,12 @@ This repository contains the official GeyserTimes R package. It is designed to f
 
 ### Installation
 
-To get started, install the package directly from GitHub. At this stage, it is not available on CRAN.
+You can install the latest released version from CRAN with:
+```r
+install.packages("geyertimes")
+```
+
+Or install the latest development version from GitHub with:
 ```r
 # install.packages("devtools")
 devtools::install_github("geysertimes/geysertimes-r-package")
