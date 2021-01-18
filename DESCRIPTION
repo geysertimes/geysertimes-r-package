@@ -1,6 +1,6 @@
 Package: geysertimes
 Title: Geyser Data from GeyserTimes.org
-Version: 0.1.0
+Version: 0.1.2
 Imports: jsonlite, lubridate, rappdirs, readr, tools, utils
 Suggests: curl, dplyr, knitr, rmarkdown
 Authors@R: 
@@ -9,8 +9,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "spkaluzny@gmail.com")
 Description: Download geyser eruption and observation data from the GeyserTimes
-  database and optionally store it locally. The vignette shows the
-  a simple analysis of downloading, accessing, and summarizing the data.
+  site (<https://geysertimes.org>) and optionally store it locally. The vignette
+  shows the a simple analysis of downloading, accessing, and summarizing
+  the data.
 License: MIT + file LICENSE
 URL: https://github.com/geysertimes/geysertimes-r-package
 BugReports: https://github.com/geysertimes/geysertimes-r-package/issues

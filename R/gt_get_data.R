@@ -36,35 +36,33 @@ gt_get_data <- function(dest_folder = file.path(tempdir(), "geysertimes"),
 eruptions_file <- function(version) {
   # eruptions data:
   base_url <- "https://geysertimes.org/archive/complete/"
-  donwload_tmp <- tempdir()
+  download_tmp <- tempdir()
   # Try specified version:
   raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
-  download_data_file_path <- file.path(donwload_tmp, raw_data_file)
+  download_data_file_path <- file.path(download_tmp, raw_data_file)
   data_url <- paste0(base_url, raw_data_file)
-  oldOpt <- options(warn=-1)
-  on.exit(options(oldOpt))
-  trydownload <- try(
+  trydownload <- suppressWarnings(try(
     download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
-      silent=TRUE)
+      silent=TRUE))
   # Try one day before specified version:
   if(trydownload != 0) {
     version <- version - 1
     raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
-    download_data_file_path <- file.path(donwload_tmp, raw_data_file)
+    download_data_file_path <- file.path(download_tmp, raw_data_file)
     data_url <- paste0(base_url, raw_data_file)
-    trydownload <- try(
+    trydownload <- suppressWarnings(try(
       download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
-        silent=TRUE)
+        silent=TRUE))
   }
   # Try one day after specified version:
   if(trydownload != 0) {
     version <- version + 1
     raw_data_file <- paste0("geysertimes_eruptions_complete_", version, ".tsv.gz")
-    download_data_file_path <- file.path(donwload_tmp, raw_data_file)
+    download_data_file_path <- file.path(download_tmp, raw_data_file)
     data_url <- paste0(base_url, raw_data_file)
-    trydownload <- try(
+    trydownload <- suppressWarnings(try(
       download.file(data_url, destfile=download_data_file_path, quiet=TRUE), 
-        silent=TRUE)
+        silent=TRUE))
   }
   if(trydownload != 0) {
     stop("Cannot download ", data_url)
