@@ -73,6 +73,9 @@ eruptions_file <- function(version) {
 read_eruptions_file <- function(path) {
   eruptions <- readr::read_tsv(gzfile(path),
     col_types=c("dcddddddddddddcccccccdddc"), quote="", progress=FALSE)
+  if(nrow(eruptions) == 0) {
+    stop("Eruptions data is unavailable for download at this time")
+  }
   # rename columns:
   indx_name <- match(names(eruptions), names(gt_new_names))
   stopifnot(!any(is.na(indx_name)))
@@ -90,6 +93,11 @@ read_eruptions_file <- function(path) {
   eruptions[["duration_modifier"]] <- replace(eruptions[["duration_modifier"]],
     which(eruptions[["duration_modifier"]] == 0), NA)
   # convert duration_seconds from character to numeric:
+  # first convert "NULL" to NA:
+  indxNULL <- which(eruptions[["duration_seconds"]] == "NULL")
+  if(length(indxNULL) > 0) {
+    eruptions[indxNULL, "duration_seconds"] <- NA_character_
+  }
   eruptions[["duration_seconds"]] <- as.numeric(eruptions[["duration_seconds"]])
   # convert 0/1 to logical FALSE/TRUE
   eruptions[["has_seconds"]] <- ifelse(eruptions[["has_seconds"]] == 1, TRUE, FALSE)

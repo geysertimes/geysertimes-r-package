@@ -1,6 +1,6 @@
 Package: geysertimes
 Title: Geyser Data from GeyserTimes.org
-Version: 0.1.3
+Version: 0.1.5
 Imports: jsonlite, lubridate, rappdirs, readr, tools, utils
 Suggests: curl, dplyr, knitr, rmarkdown
 Authors@R: 
@@ -15,5 +15,4 @@ License: MIT + file LICENSE
 URL: https://github.com/geysertimes/geysertimes-r-package
 BugReports: https://github.com/geysertimes/geysertimes-r-package/issues
 VignetteBuilder: knitr, rmarkdown
-LazyData: yes
 NeedsCompilation: no
