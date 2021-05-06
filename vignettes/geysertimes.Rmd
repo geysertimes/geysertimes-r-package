@@ -6,19 +6,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(collapse = T, comment = "#>")
-options(tibble.print_min = 4L, tibble.print_max = 4L)
-```
-```{r, hidden_values, echo=FALSE}
-default_path <- "/tmp/RtmpvSGw5Y/geysertimes/2021-01-04"
-suggested_path <- "/home/spk/.local/share/GeyserTimes/2021-01-04"
-```
-
 # Basic Use
 
 Load the package other packages used in this vignette.
-```{r library}
+
+```r
 suppressPackageStartupMessages(library("dplyr"))
 library("geysertimes")
 ```
@@ -36,29 +28,36 @@ The default location for `dest_folder` is
 This default location is used to meet the CRAN requirement of
 not writing files by default to any location other than under `tempdir()`.
 
-```{r default_get}
+```r
 default_path <- gt_get_data()
+#> Set dest_folder to geysertimes::gt_path() so that data persists between R sessions.
 ```
-```{r default_get_print}
+
+```r
 default_path
+#> [1] "/tmp/RtmpUtc3wI/geysertimes/2021-05-06"
 ```
 
 Users are encouraged to set `dest_folder` to the value given by
 `gt_path()` which is a permanent location appropriate for the
 user on the particular platform.
 
-```{r gt_path}
+```r
 gt_path()
+#> [1] "~/.local/share/geysertimes"
 ```
 
 If a permanent location is used, the user only needs to get the
 data once.
 Using the suggested value for `dest_folder`:
-```{r suggested_path, eval=FALSE}
+
+```r
 suggested_path <- gt_get_data(dest_folder=gt_path())
 ```
-```{r recommend_path_print}
+
+```r
 suggested_path
+#> [1] "~/.local/share/geysertimes/2021-05-06"
 ```
 
 ## Load the Data
@@ -67,15 +66,26 @@ The `gt_load_eruptions` is used to load the eruptions data in the
 current session.
 The `gt_load_geysers` loads the geyser location data in the current session.
 
-```{r load01}
+```r
 eruptions <- gt_load_eruptions()
 geysers <- gt_load_geysers()
 ```
 
 A quick look at the data:
-```{r look}
+
+```r
 dim(eruptions)
+#> [1] 1292133      25
 names(eruptions)
+#>  [1] "eruption_id"         "geyser"              "time"               
+#>  [4] "has_seconds"         "exact"               "near_start"         
+#>  [7] "in_eruption"         "electronic"          "approximate"        
+#> [10] "webcam"              "initial"             "major"              
+#> [13] "minor"               "questionable"        "duration"           
+#> [16] "duration_seconds"    "duration_resolution" "duration_modifier"  
+#> [19] "entrant"             "observer"            "comment"            
+#> [22] "time_updated"        "time_entered"        "primary_id"         
+#> [25] "other_comments"
 ```
 
 ### Data Version
@@ -87,19 +97,45 @@ has been downloaded.
 Setting `all=TRUE` will list all versions of the data that have been
 downloaded.
 
-
-```{r version}
+```r
 gt_version()
+#> [1] "2021-05-06"
 ```
 
-```{r version_all}
+```r
 gt_version(all=TRUE)
+#> [1] "2021-05-06"
 ```
 
 ## Simple Analysis
 
 Geysers with the most recorded eruptions:
-```{r eruptions_counts, tibble.print_max=20L}
+
+```r
 print(n=20,
 eruptions %>% group_by(geyser) %>% summarise(N=n()) %>% arrange(desc(N)))
+#> # A tibble: 450 x 2
+#>    geyser              N
+#>    <chr>           <int>
+#>  1 Old Faithful   184096
+#>  2 Plume          143792
+#>  3 Daisy           99807
+#>  4 Little Cub      96889
+#>  5 Lion            63418
+#>  6 Grand           41475
+#>  7 Aurum           35881
+#>  8 Oblong          34080
+#>  9 Fountain        27463
+#> 10 Spouter         26981
+#> 11 Riverside       26678
+#> 12 Castle          25787
+#> 13 Logbridge       23416
+#> 14 Plate           21594
+#> 15 Echinus         21330
+#> 16 Depression      20668
+#> 17 Turban          18885
+#> 18 Great Fountain  18880
+#> 19 Grotto          17533
+#> 20 Jet             16368
+#> # ... with 430 more rows
 ```

@@ -1,6 +1,6 @@
 Package: geysertimes
 Title: Geyser Data from GeyserTimes.org
-Version: 0.1.5
+Version: 0.1.6
 Imports: jsonlite, lubridate, rappdirs, readr, tools, utils
 Suggests: curl, dplyr, knitr, rmarkdown
 Authors@R: 
