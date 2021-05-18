@@ -57,6 +57,7 @@ gt_load_eruptions, gt_load_geysers.
 \donttest{
 dpath0 <- gt_get_data()  # data saved under tempdir()
 dpath1 <- gt_get_data(dest=gt_path())  # data saved under gt_path()
+gt_cleanup_data(gt_version())
 }
 }
 \keyword{geysertimes}
