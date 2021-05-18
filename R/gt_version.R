@@ -15,5 +15,5 @@
   } else {
     versions[1]
   }
-  version
+  as.character(version)
 }
