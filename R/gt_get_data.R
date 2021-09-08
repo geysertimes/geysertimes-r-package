@@ -1,6 +1,6 @@
 gt_get_data <- function(dest_folder = file.path(tempdir(), "geysertimes"),
   overwrite=FALSE, quiet=FALSE, version=lubridate::today()) {
-  if(dest_folder != gt_path()) {
+  if(missing(dest_folder)) {
     if(!quiet) {
       message("Set dest_folder to geysertimes::gt_path() so that data persists between R sessions.\n")
     }

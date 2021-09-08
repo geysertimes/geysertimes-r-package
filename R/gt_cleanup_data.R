@@ -25,5 +25,8 @@ gt_cleanup_data <- function(version=NULL, old=FALSE, path=gt_path()) {
       stop("Cannot find version ", version, " under ", path)
     }
   }
+  if(path == gt_path() && dir.exists(path) && length(list.files(path)) < 1) {
+    unlink(path, recursive=TRUE)
+  }
   ret_val
 }
