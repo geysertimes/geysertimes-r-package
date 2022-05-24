@@ -1,5 +1,4 @@
-# GeyserTimes R Package
-# geyertimes <img src='man/figures/logo.png' align="right" height="139" /></a>
+# geysertimes <img src='man/figures/logo.png' align="right" height="139" /></a>
 
 This repository contains the official GeyserTimes R package. It is designed to facilitate easy access to the data hosted at [GeyserTimes](https://geysertimes.org) using the R language. It primarily targets researchers and supports the following functionality.
 
