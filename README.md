@@ -1,4 +1,6 @@
-# geysertimes <img src='man/figures/logo.png' align="right" height="139" /></a>
+## geysertimes <img src='man/figures/logo.png' align="right" height="139" /></a>
+
+[![![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 
 This repository contains the official GeyserTimes R package. It is designed to facilitate easy access to the data hosted at [GeyserTimes](https://geysertimes.org) using the R language. It primarily targets researchers and supports the following functionality.
 
