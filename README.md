@@ -11,7 +11,7 @@ This repository contains the official GeyserTimes R package. It is designed to f
 
 You can install the latest released version from CRAN with:
 ```r
-install.packages("geyertimes")
+install.packages("geysertimes")
 ```
 
 Or install the latest development version from GitHub with:
